@@ -34,41 +34,41 @@ val_steps = np.ceil(num_val_samples / val_batch_size)
 # Set up generators
 train_batches = ImageDataGenerator(
     preprocessing_function= \
-        keras.applications.mobilenet.preprocess_input).flow_from_directory(
+        keras.applications.resnet50.preprocess_input).flow_from_directory(
     train_path,
     target_size=(image_size, image_size),
     batch_size=train_batch_size)
 
 valid_batches = ImageDataGenerator(
     preprocessing_function= \
-        keras.applications.mobilenet.preprocess_input).flow_from_directory(
+        keras.applications.resnet50.preprocess_input).flow_from_directory(
     valid_path,
     target_size=(image_size, image_size),
     batch_size=val_batch_size)
 
 test_batches = ImageDataGenerator(
     preprocessing_function= \
-        keras.applications.mobilenet.preprocess_input).flow_from_directory(
+        keras.applications.resNet50.preprocess_input).flow_from_directory(
     valid_path,
     target_size=(image_size, image_size),
     batch_size=val_batch_size,
     shuffle=False)
 
-# Create a MobileNet model
-mobile = keras.applications.mobilenet.MobileNet()
+# Create a ResNet50 model
+resnet = keras.applications.resnet50.ResNet50()
 
 # See a summary of the layers in the model
-mobile.summary()
+resnet.summary()
 
 # Modify the model
 # Exclude the last 5 layers of the model
-x = mobile.layers[-6].output
+x = resnet.layers[-6].output
 # Add a dropout and dense layer for predictions
 x = Dropout(0.25)(x)
 predictions = Dense(7, activation='softmax')(x)
 
 # Create a new model with the new outputs
-model = Model(inputs=mobile.input, outputs=predictions)
+model = Model(inputs=resnet.input, outputs=predictions)
 
 # See a summary of the new layers in the model
 model.summary()
