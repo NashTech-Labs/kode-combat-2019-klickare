@@ -1,4 +1,4 @@
-# The model for the skin cancer classifier
+# The model for the skin diseases classifier
 
 # Import the libraries
 import numpy as np
