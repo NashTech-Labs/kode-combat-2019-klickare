@@ -1,4 +1,4 @@
-# Skin Cancer Dataset Preprocessing
+# Skin diseases Dataset Preprocessing
 
 # Import the libraries
 import pandas as pd
